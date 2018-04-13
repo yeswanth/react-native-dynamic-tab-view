@@ -31,7 +31,7 @@ class DynamicTabViewScrollHeader extends React.Component {
         return (
             <TouchableHighlight
                 onPress={this._onPressHeader.bind(this, index)}
-                style={this.style.container}
+                style={this.style.tabContainer}
                 underlayColor={"#aaaaaa"}
             >
                 <View>
@@ -66,7 +66,7 @@ class DynamicTabViewScrollHeader extends React.Component {
 }
 
 const styles = {
-    container: {
+    tabContainer: {
         overflow: 'hidden',
         backgroundColor: '#555555',
         "padding": 20,

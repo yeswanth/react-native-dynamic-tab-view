@@ -18,15 +18,15 @@ class DynamicTabView extends React.Component {
             index: this.props.defaultIndex,
             containerWidth: Dimensions.get('window').width
         }
-    }
-
-    _onChangeTab = () => {
-
+        this.style = styles;
     }
 
     goToPage = (index) => {
         this.setState({index})
         this.flatView.scrollToIndex({index});
+        if(this.props.onChangeTab){
+            this.props.onChangeTab(index);
+        }
     }
 
     _onLayout = (e) => {
@@ -36,7 +36,7 @@ class DynamicTabView extends React.Component {
 
     _renderTab = ({ item, index }) => {
         return (<View
-            style={{ width: this.state.containerWidth }}>
+            style={[{ width: this.state.containerWidth },this.style.tabContainer]}>
             {this.props.renderTab(item, index)}
         </View>);
     }
@@ -69,6 +69,12 @@ class DynamicTabView extends React.Component {
     }
 }
 
+const styles = {
+    tabContainer:{
+        flex:1
+    }
+}
+
 DynamicTabView.defaultStyle = {
     
 }
@@ -78,7 +84,7 @@ DynamicTabView.defaultProps = {
 }
 
 DynamicTabView.propTypes = {
-
+    onChangeTab:PropTypes.func
 }
 
 export default DynamicTabView;
