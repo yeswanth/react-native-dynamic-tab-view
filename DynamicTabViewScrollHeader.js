@@ -54,6 +54,9 @@ class DynamicTabViewScrollHeader extends React.Component {
         return (
             <FlatList
                 horizontal
+                alwaysBounceHorizontal={false}
+                bounces={false}
+                showsHorizontalScrollIndicator={false}
                 data={this.props.data}
                 extraData={this.state}
                 renderItem={this._renderTitle}
