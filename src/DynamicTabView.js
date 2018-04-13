@@ -69,6 +69,10 @@ class DynamicTabView extends React.Component {
     }
 }
 
+DynamicTabView.defaultStyle = {
+    
+}
+
 DynamicTabView.defaultProps = {
     defaultIndex: 0
 }
