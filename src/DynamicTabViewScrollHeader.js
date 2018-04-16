@@ -12,7 +12,7 @@ class DynamicTabViewScrollHeader extends React.Component {
         super(props);
         this.style = styles;
         this.state = {
-            selected:this.props.selectedTab
+            selected: this.props.selectedTab
         }
     }
 
@@ -20,9 +20,9 @@ class DynamicTabViewScrollHeader extends React.Component {
         this.props.goToPage(index);
     }
 
-    componentWillReceiveProps(nextProps){
-        if (nextProps.selectedTab !== this.props.selectedTab){
-            this.setState({selected:nextProps.selectedTab})
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.selectedTab !== this.props.selectedTab) {
+            this.setState({ selected: nextProps.selectedTab })
         }
     }
 
@@ -73,13 +73,13 @@ const styles = {
         justifyContent: 'center',
         'alignItems': 'center'
     },
-    highlight:{
-        backgroundColor:'white',
+    highlight: {
+        backgroundColor: 'white',
         paddingHorizontal: 10,
         paddingVertical: 2,
         marginTop: 5
     },
-    noHighlight:{
+    noHighlight: {
         paddingHorizontal: 10,
         paddingVertical: 2,
         marginTop: 5

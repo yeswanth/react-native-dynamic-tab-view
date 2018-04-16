@@ -15,7 +15,7 @@ class DynamicTabView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: this.props.defaultIndex,
+            index: 0,
             containerWidth: Dimensions.get('window').width
         }
         this.style = styles;
