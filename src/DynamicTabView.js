@@ -22,9 +22,9 @@ class DynamicTabView extends React.Component {
     }
 
     goToPage = (index) => {
-        this.setState({index})
-        this.flatView.scrollToIndex({index});
-        if(this.props.onChangeTab){
+        this.setState({ index })
+        this.flatView.scrollToIndex({ index });
+        if (this.props.onChangeTab) {
             this.props.onChangeTab(index);
         }
     }
@@ -36,13 +36,13 @@ class DynamicTabView extends React.Component {
 
     _renderTab = ({ item, index }) => {
         return (<View
-            style={[{ width: this.state.containerWidth },this.style.tabContainer]}>
+            style={[{ width: this.state.containerWidth }, this.style.tabContainer]}>
             {this.props.renderTab(item, index)}
         </View>);
     }
 
     _renderHeader = () => {
-        return (<View>
+        return (<View style={this.style.headerContainer}>
             <DynamicTabViewScrollHeader
                 data={this.props.data}
                 goToPage={this.goToPage}
@@ -70,13 +70,25 @@ class DynamicTabView extends React.Component {
 }
 
 const styles = {
-    tabContainer:{
-        flex:1
+    headerContainer: {
+        backgroundColor: 'white'
+    },
+    tabContainer: {
+        flex: 1
+    },
+    labelStyle: {
+        color: 'white',
+    },
+    indicatorStyle: {
+        backgroundColor: 'white',
+        marginVertical: 1,
+        bottom: 4, //indicatorStyle is implemented in absolute in the library
+        height: 4,
     }
 }
 
 DynamicTabView.defaultStyle = {
-    
+
 }
 
 DynamicTabView.defaultProps = {
@@ -84,7 +96,7 @@ DynamicTabView.defaultProps = {
 }
 
 DynamicTabView.propTypes = {
-    onChangeTab:PropTypes.func
+    onChangeTab: PropTypes.func
 }
 
 export default DynamicTabView;
