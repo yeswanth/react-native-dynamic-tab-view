@@ -18,12 +18,12 @@ class DynamicTabView extends React.Component {
             index: this.props.defaultIndex,
             containerWidth: Dimensions.get('window').width
         }
-        this.style = styles;
+        this.defaultStyle = DynamicTabView.defaultStyle;
     }
 
     componentDidMount() {
         //HACK 
-        let wait = new Promise((resolve) => setTimeout(resolve, 100)); 
+        let wait = new Promise((resolve) => setTimeout(resolve, 100));
         wait.then(() => {
             this.flatView.scrollToIndex({ index: this.state.index, animated: false });
         });
@@ -48,13 +48,13 @@ class DynamicTabView extends React.Component {
 
     _renderTab = ({ item, index }) => {
         return (<View
-            style={[{ width: this.state.containerWidth }, this.style.tabContainer]}>
+            style={[{ width: this.state.containerWidth }, this.defaultStyle.tabContainer, this.props.tabContainerStyle]}>
             {this.props.renderTab(item, index)}
         </View>);
     }
 
     _renderHeader = () => {
-        return (<View style={this.style.headerContainer}>
+        return (<View style={[this.defaultStyle.headerContainer, this.props.headerContainerStyle]}>
             <DynamicTabViewScrollHeader
                 data={this.props.data}
                 goToPage={this.goToPage}
@@ -64,13 +64,14 @@ class DynamicTabView extends React.Component {
     }
 
     render() {
-        return (<View onLayout={this._onLayout} style={{ flex: 1 }}>
+        return (<View onLayout={this._onLayout} style={[this.defaultStyle.container, this.props.containerStyle]}>
             {this._renderHeader()}
             <FlatList
                 {...this.props}
                 horizontal
                 scrollEnabled={false}
                 ref={(flatView) => { this.flatView = flatView; }}
+                styleCustomization={this.props.styleCustomization}
                 renderItem={this._renderTab}
                 scrollEventThrottle={10}
                 keyboardDismissMode={'on-drag'}
@@ -82,7 +83,10 @@ class DynamicTabView extends React.Component {
     }
 }
 
-const styles = {
+DynamicTabView.defaultStyle = {
+    container: {
+        flex: 1
+    },
     headerContainer: {
         backgroundColor: 'white'
     },
@@ -100,16 +104,19 @@ const styles = {
     }
 }
 
-DynamicTabView.defaultStyle = {
-
-}
-
 DynamicTabView.defaultProps = {
-    defaultIndex: 0
+    defaultIndex: 0,
+    'containerStyle': {},
+    'tabContainerStyle': {},
+    'headerContainerStyle': {}
 }
 
 DynamicTabView.propTypes = {
-    onChangeTab: PropTypes.func
+    onChangeTab: PropTypes.func,
+    styleCustomization: PropTypes.object,
+    containerStyle: PropTypes.any,
+    tabContainerStyle: PropTypes.any,
+    headerContainerStyle: PropTypes.any
 }
 
 export default DynamicTabView;

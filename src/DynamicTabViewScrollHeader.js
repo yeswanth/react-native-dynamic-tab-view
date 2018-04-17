@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 class DynamicTabViewScrollHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.style = styles;
+        this.defaultStyle = DynamicTabViewScrollHeader.defaultStyle;
         this.state = {
             selected: this.props.selectedTab
         }
@@ -27,16 +27,17 @@ class DynamicTabViewScrollHeader extends React.Component {
     }
 
     _renderTitle = ({ item, index }) => {
-        let showHighlight = index === this.state.selected;
+        let isTabActive = index === this.state.selected;
+        let fontWeight = isTabActive ? 'bold' : 'normal';
         return (
             <TouchableHighlight
                 onPress={this._onPressHeader.bind(this, index)}
-                style={this.style.tabContainer}
+                style={this.defaultStyle.tabContainer}
                 underlayColor={"#aaaaaa"}
             >
                 <View>
-                    <Text>{item['title']}</Text>
-                    {this._renderHighlight(showHighlight)}
+                    <Text style={[{'fontWeight':fontWeight},this.defaultStyle.textStyle]}>{item['title']}</Text>
+                    {this._renderHighlight(isTabActive)}
                 </View>
             </TouchableHighlight>
         )
@@ -44,9 +45,9 @@ class DynamicTabViewScrollHeader extends React.Component {
 
     _renderHighlight = (showHighlight) => {
         if (showHighlight) {
-            return (<View style={this.style.highlight}></View>)
+            return (<View style={this.defaultStyle.highlight}></View>)
         } else {
-            return (<View style={this.style.noHighlight}></View>)
+            return (<View style={this.defaultStyle.noHighlight}></View>)
         }
     }
 
@@ -65,7 +66,10 @@ class DynamicTabViewScrollHeader extends React.Component {
     }
 }
 
-const styles = {
+DynamicTabViewScrollHeader.defaultStyle = {
+    textStyle:{
+        color:'white'
+    },
     tabContainer: {
         overflow: 'hidden',
         backgroundColor: '#555555',
