@@ -15,11 +15,23 @@ class DynamicTabView extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            index: 0,
+            index: this.props.defaultIndex,
             containerWidth: Dimensions.get('window').width
         }
         this.style = styles;
     }
+
+    componentDidMount() {
+        //HACK 
+        let wait = new Promise((resolve) => setTimeout(resolve, 100)); 
+        wait.then(() => {
+            this.flatView.scrollToIndex({ index: this.state.index, animated: false });
+        });
+    }
+
+    getItemLayout = (data, index) => (
+        { length: this.state.containerWidth, offset: this.state.containerWidth * index, index }
+    )
 
     goToPage = (index) => {
         this.setState({ index })
@@ -62,6 +74,7 @@ class DynamicTabView extends React.Component {
                 renderItem={this._renderTab}
                 scrollEventThrottle={10}
                 keyboardDismissMode={'on-drag'}
+                getItemLayout={this.getItemLayout}
             >
             </FlatList>
         </View>
