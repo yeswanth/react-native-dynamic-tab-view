@@ -34,8 +34,8 @@ Here `data` is of the format
 ```
 [
    { title: 'Tab1', key: 'item1', color: 'blue' },
-      { title: 'Tab2', key: 'item2', 'color': 'yellow' },
-      { title: 'Tab3', key: 'item3', 'color': 'brown' },
+   { title: 'Tab2', key: 'item2', 'color': 'yellow' },
+   { title: 'Tab3', key: 'item3', 'color': 'brown' },
 
 ]
 ```
