@@ -14,8 +14,8 @@ Simply `yarn install @walkin-frontend/react-native-dynamic-tab-view`
 
 ### Why are you building another TabView library? 
 At present, there are two tabView libraries that are out there 
-* `react-native-scrollable-tab-view`
-* `react-native-tab-view`
+* [react-native-scrollable-tab-view](https://www.google.com/search?q=react-native-scrollable-tab-view)
+* [react-native-tab-view](https://github.com/react-native-community/react-native-tab-view)
 I have used both of them and I had multitude of issues with them. 
 * `react-native-scrollable-tab-view` 
   - Doesn't have proper maintainence. Last update was back in October. There are lot of open PRs. 
