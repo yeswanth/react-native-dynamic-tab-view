@@ -32,11 +32,14 @@ class DynamicTabViewScrollHeader extends React.Component {
         return (
             <TouchableHighlight
                 onPress={this._onPressHeader.bind(this, index)}
-                style={this.defaultStyle.tabContainer}
-                underlayColor={"#aaaaaa"}
+                style={[this.defaultStyle.tabItemContainer, this.props.tabItemContainerStyle]}
+                underlayColor={"#00000033"}
             >
                 <View>
-                    <Text style={[{'fontWeight':fontWeight},this.defaultStyle.textStyle]}>{item['title']}</Text>
+                    <Text style={[{ 'fontWeight': fontWeight }, this.defaultStyle.tabItemText,
+                    this.props.tabItemTextStyle]}>
+                        {item['title']}
+                    </Text>
                     {this._renderHighlight(isTabActive)}
                 </View>
             </TouchableHighlight>
@@ -45,9 +48,9 @@ class DynamicTabViewScrollHeader extends React.Component {
 
     _renderHighlight = (showHighlight) => {
         if (showHighlight) {
-            return (<View style={this.defaultStyle.highlight}></View>)
+            return (<View style={[this.defaultStyle.highlight,this.props.highlightStyle]}></View>)
         } else {
-            return (<View style={this.defaultStyle.noHighlight}></View>)
+            return (<View style={[this.defaultStyle.noHighlight,this.props.noHighlightStyle]}></View>)
         }
     }
 
@@ -67,10 +70,10 @@ class DynamicTabViewScrollHeader extends React.Component {
 }
 
 DynamicTabViewScrollHeader.defaultStyle = {
-    textStyle:{
-        color:'white'
+    tabItemText: {
+        color: 'white'
     },
-    tabContainer: {
+    tabItemContainer: {
         overflow: 'hidden',
         backgroundColor: '#555555',
         "padding": 20,
@@ -97,6 +100,10 @@ DynamicTabViewScrollHeader.defaultProps = {
 DynamicTabViewScrollHeader.propTypes = {
     goToPage: PropTypes.func.isRequired,
     selectedTab: PropTypes.number.isRequired,
+    tabItemContainerStyle: PropTypes.any,
+    tabItemTextStyle: PropTypes.any, 
+    highlightStyle: PropTypes.any,
+    noHighlightStyle: PropTypes.any
 }
 
 
