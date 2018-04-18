@@ -7,6 +7,10 @@
 - Dynamic tab data that is updated after an API call 
 - Non-zero default tab support 
 
+### Yet to come
+- TabView content scroll has been disabled (till I add support for the header scrolling smoothly with that of the body)
+- Animations and positing of headers 
+
 ## How to use
 Simply `yarn install @walkin-frontend/react-native-dynamic-tab-view`
 
@@ -32,8 +36,6 @@ I have used both of them and I had multitude of issues with them.
 - More importantly, uses FlatList for creating the tabViews 
 - Easy to read code 
 
-### What's missing in v0.1.0?
-- TabView content scroll has been disabled (till I add support for the header scrolling smoothly with that of the body)
-- Animations and positing of headers 
+
 
 
