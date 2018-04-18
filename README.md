@@ -16,7 +16,8 @@ Simply install by running `yarn install @walkin-frontend/react-native-dynamic-ta
 
 Use it by 
 
-`import DynamicTabView from '@walkin-frontend/react-native-dynamic-tab-view';
+```
+import DynamicTabView from '@walkin-frontend/react-native-dynamic-tab-view';
  <DynamicTabView
         data={dataSource}
         renderTab={renderTab}
@@ -25,8 +26,25 @@ Use it by
         containerStyle={styles.container}
         headerContainerStyle={styles.headerContainer}
         tabItemContainerStyle={styles.tabItemContainer}
-      />`
-      
+      />
+```
+
+Here `data` is of the format
+
+```
+[
+   { title: 'Tab1', key: 'item1', color: 'blue' },
+      { title: 'Tab2', key: 'item2', 'color': 'yellow' },
+      { title: 'Tab3', key: 'item3', 'color': 'brown' },
+
+]
+```
+
+### Important Props 
+* **data** telling the view what to render.
+* **renderTab** method to render individual tab. It should return a valid React Component 
+* **onChangeTab** callback that will be invoked when a user changes tab 
+* **defaultIndex** index of the tab that will be selected by default. 
      
 
 ## FAQs
