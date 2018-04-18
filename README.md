@@ -12,7 +12,22 @@
 - Animations and positing of headers 
 
 ## How to use
-Simply `yarn install @walkin-frontend/react-native-dynamic-tab-view`
+Simply install by running `yarn install @walkin-frontend/react-native-dynamic-tab-view`
+
+Use it by 
+
+`import DynamicTabView from '@walkin-frontend/react-native-dynamic-tab-view';
+ <DynamicTabView
+        data={dataSource}
+        renderTab={renderTab}
+        onChangeTab={onChangeTab}
+        defaultIndex={defaultIndex}
+        containerStyle={styles.container}
+        headerContainerStyle={styles.headerContainer}
+        tabItemContainerStyle={styles.tabItemContainer}
+      />`
+      
+     
 
 ## FAQs
 
