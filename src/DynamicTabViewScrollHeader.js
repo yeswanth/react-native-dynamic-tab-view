@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 class DynamicTabViewScrollHeader extends React.Component {
     constructor(props) {
         super(props);
-        this.defaultStyle = DynamicTabViewScrollHeader.defaultStyle;
+        this.defaultStyle = DynamicdefaultStyle;
         this.state = {
             selected: this.props.selectedTab
         }
@@ -69,7 +69,7 @@ class DynamicTabViewScrollHeader extends React.Component {
     }
 }
 
-DynamicTabViewScrollHeader.defaultStyle = {
+DynamicdefaultStyle = {
     tabItemText: {
         color: 'white'
     },
