@@ -16,9 +16,11 @@ class DynamicTabView extends React.Component {
         super(props);
         this.state = {
             index: this.props.defaultIndex,
-            containerWidth: Dimensions.get('window').width
+            containerWidth: Dimensions.get('window').width,
+            begin_offset: null,
+            end_offset: null
         }
-        this.defaultStyle = DynamicTabView.defaultStyle;
+        this.defaultStyle = defaultStyle;
     }
 
     componentDidMount() {
@@ -38,6 +40,39 @@ class DynamicTabView extends React.Component {
         this.flatView.scrollToIndex({ index });
         if (this.props.onChangeTab) {
             this.props.onChangeTab(index);
+        }
+    }
+
+    onScrollBeginDrag = (e) => {
+        var begin_offset = e.nativeEvent.contentOffset.x; //since horizontal scroll view begin 
+        // console.log(begin_offset);
+        this.setState({ begin_offset });
+    }
+
+    onScrollEndDrag = (e) => {
+        var end_offset = e.nativeEvent.contentOffset.x; // since horizontal scroll view end
+        // console.log(end_offset)
+        this.setState({ end_offset });
+    }
+
+     // To calculate Page scroll from left->right or right->left
+    _onCalculateIndex = (begin_offset, end_offset, width) => {
+        var begin_offset = this.state.begin_offset;
+        var end_offset = this.state.end_offset;
+        var width = this.state.containerWidth;
+
+        if (begin_offset < end_offset) {
+            let index = begin_offset/width + 1; // if Page scroll from left->right, index is increase by 1 
+
+            if (index < this.props.data.length) {
+                this.setState({ index })
+            }
+        } else if (begin_offset > end_offset || begin_offset === end_offset) {
+            let index = begin_offset/width - 1; // if Page scroll from right->left, index is decrease by 1
+
+            if (index < this.props.data.length && index !== -1) {
+                this.setState({ index })
+            }
         }
     }
 
@@ -70,13 +105,17 @@ class DynamicTabView extends React.Component {
             <FlatList
                 {...this.props}
                 horizontal
-                scrollEnabled={false}
+                scrollEnabled={true}
                 ref={(flatView) => { this.flatView = flatView; }}
                 styleCustomization={this.props.styleCustomization}
                 renderItem={this._renderTab}
                 scrollEventThrottle={10}
                 keyboardDismissMode={'on-drag'}
                 getItemLayout={this.getItemLayout}
+                pagingEnabled={true}
+                onMomentumScrollBegin={this._onCalculateIndex}
+                onScrollBeginDrag={this.onScrollBeginDrag}
+                onScrollEndDrag={this.onScrollEndDrag}
             >
             </FlatList>
         </View>
@@ -84,7 +123,7 @@ class DynamicTabView extends React.Component {
     }
 }
 
-DynamicTabView.defaultStyle = {
+defaultStyle = {
     container: {
         flex: 1
     },

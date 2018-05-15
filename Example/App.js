@@ -24,6 +24,9 @@ type Props = {};
 export default class App extends Component<Props> {
   constructor(props) {
     super(props);
+    this.state = {
+      defaultIndex: 0
+    }
     this.data = [
       { title: 'Tab1', key: 'item1', color: 'blue' },
       { title: 'Tab2', key: 'item2', 'color': 'yellow' },
@@ -52,6 +55,10 @@ export default class App extends Component<Props> {
       <DynamicTabView
         data={this.data}
         renderTab={this._renderItem}
+        defaultIndex={this.state.defaultIndex}
+        containerStyle={styles.container}
+        headerContainerStyle={styles.headerContainer}
+        tabItemContainerStyle={styles.tabItemContainer}
       />
     );
   }
@@ -59,19 +66,12 @@ export default class App extends Component<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    flex: 1
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  headerContainer: {
+    marginTop: 16,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  tabItemContainer: {
+    backgroundColor: '#cf6bab'
   },
 });
