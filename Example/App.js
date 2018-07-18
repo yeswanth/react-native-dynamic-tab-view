@@ -49,6 +49,10 @@ export default class App extends Component<Props> {
     </View>)
   }
 
+  onChangeTab = (index) => {
+    console.log(index);
+  }
+
   render() {
 
     return (
@@ -59,6 +63,7 @@ export default class App extends Component<Props> {
         containerStyle={styles.container}
         headerContainerStyle={styles.headerContainer}
         tabItemContainerStyle={styles.tabItemContainer}
+        onChangeTab={this.onChangeTab}
       />
     );
   }

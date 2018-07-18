@@ -65,13 +65,13 @@ class DynamicTabView extends React.Component {
             let index = begin_offset/width + 1; // if Page scroll from left->right, index is increase by 1 
 
             if (index < this.props.data.length) {
-                this.setState({ index })
+                this.goToPage(index);
             }
         } else if (begin_offset > end_offset || begin_offset === end_offset) {
             let index = begin_offset/width - 1; // if Page scroll from right->left, index is decrease by 1
 
             if (index < this.props.data.length && index !== -1) {
-                this.setState({ index })
+                this.goToPage(index);
             }
         }
     }
