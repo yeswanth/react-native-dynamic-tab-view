@@ -421,8 +421,8 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"RNDynamicTabView@file:..":
-  version "0.1.0"
+"RNDynamicTabView@file:../Lib":
+  version "0.1.1-1"
 
 abab@^1.0.4:
   version "1.0.4"
