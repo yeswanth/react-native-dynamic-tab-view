@@ -1,11 +1,11 @@
 ## Open source check-list 
-* Header should scroll with the fingers 
-* If there are many headers, then the header should scroll appropriately to that length
-* GIF showing how the project works 
-* Publishing it in WalkIn Github and npm 
-* Add Contributing.md & license for the project(figure out from Pavan) 
-* Look at other open source repositories and add tests 
-* Npm tags 
+- [] Header should scroll with the fingers 
+- [] If there are many headers, then the header should scroll appropriately to that length
+- [] GIF showing how the project works 
+- [] Publishing it in WalkIn Github and npm 
+- [] Add Contributing.md & license for the project(figure out from Pavan) 
+- [] Look at other open source repositories and add tests 
+- [] Npm tags 
 
 ## Features 
 - Easy to use and easy to read code
@@ -77,8 +77,3 @@ I have used both of them and I had multitude of issues with them.
 - Uses same code for Android and iOS 
 - More importantly, uses FlatList for creating the tabViews 
 - Easy to read code 
-
-
-
-
-
