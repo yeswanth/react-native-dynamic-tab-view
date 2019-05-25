@@ -17,7 +17,6 @@
 - Non-zero default tab support 
 
 ### Yet to come
-- TabView content scroll has been disabled (till I add support for the header scrolling smoothly with that of the body)
 - Animations and positing of headers 
 
 ## How to use
