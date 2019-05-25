@@ -24,10 +24,11 @@ class DynamicTabView extends React.Component {
     }
 
     componentDidMount() {
-        //HACK 
+        //HACK
         let wait = new Promise((resolve) => setTimeout(resolve, 100));
         wait.then(() => {
             this.flatView.scrollToIndex({ index: this.state.index, animated: false });
+            this.headerRef.scrollHeader(this.state.index)
         });
     }
 
@@ -41,10 +42,12 @@ class DynamicTabView extends React.Component {
         if (this.props.onChangeTab) {
             this.props.onChangeTab(index);
         }
+
+        this.headerRef.scrollHeader(index);
     }
 
     onScrollBeginDrag = (e) => {
-        var begin_offset = e.nativeEvent.contentOffset.x; //since horizontal scroll view begin 
+        var begin_offset = e.nativeEvent.contentOffset.x; //since horizontal scroll view begin
         // console.log(begin_offset);
         this.setState({ begin_offset });
     }
@@ -62,7 +65,7 @@ class DynamicTabView extends React.Component {
         var width = this.state.containerWidth;
 
         if (begin_offset < end_offset) {
-            let index = Math.floor(begin_offset/width) + 1; // if Page scroll from left->right, index is increase by 1 
+            let index = Math.floor(begin_offset/width) + 1; // if Page scroll from left->right, index is increase by 1
 
             if (index < this.props.data.length) {
                 this.goToPage(index);
@@ -91,6 +94,7 @@ class DynamicTabView extends React.Component {
     _renderHeader = () => {
         return (<View style={[this.defaultStyle.headerContainer, this.props.headerContainerStyle]}>
             <DynamicTabViewScrollHeader
+                ref={ headerRef => { this.headerRef = headerRef } }
                 data={this.props.data}
                 goToPage={this.goToPage}
                 selectedTab={this.state.index}
@@ -165,7 +169,7 @@ DynamicTabView.propTypes = {
     headerContainerStyle: PropTypes.any,
     //header style props
     tabItemContainerStyle: PropTypes.any,
-    tabItemTextStyle: PropTypes.any, 
+    tabItemTextStyle: PropTypes.any,
     highlightStyle: PropTypes.any,
     noHighlightStyle: PropTypes.any
 }
