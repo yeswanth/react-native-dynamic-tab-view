@@ -1,6 +1,6 @@
 {
     "name": "react-native-dynamic-tab-view",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "main": "index.js",
     "files": [
         "src/"
@@ -25,5 +25,6 @@
     },
     "modulePathIgnorePatterns": [
         "Example"
-    ]
+    ],
+    "keywords": ["react-native","react-native-component","tab-view","tab","dynamic"]
 }
