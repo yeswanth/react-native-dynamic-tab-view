@@ -70,3 +70,6 @@ I have used both of them and I had multitude of issues with them.
 - Uses same code for Android and iOS 
 - More importantly, uses FlatList for creating the tabViews 
 - Easy to read code 
+
+### Contributors 
+* [@yeswanth](https://github.com/yeswanth)
