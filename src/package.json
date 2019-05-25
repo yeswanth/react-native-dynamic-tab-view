@@ -1,5 +1,5 @@
 {
-    "name": "@walkin-frontend/react-native-dynamic-tab-view",
+    "name": "react-native-dynamic-tab-view",
     "version": "0.1.1-2",
     "main": "index.js",
     "files": [
