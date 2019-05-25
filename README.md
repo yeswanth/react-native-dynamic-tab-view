@@ -25,7 +25,7 @@ Simply install by running `yarn install react-native-dynamic-tab-view`
 Use it by 
 
 ```
-import DynamicTabView from '@walkin-frontend/react-native-dynamic-tab-view';
+import DynamicTabView from 'react-native-dynamic-tab-view';
  <DynamicTabView
         data={dataSource}
         renderTab={renderTab}
