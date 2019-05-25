@@ -2,7 +2,7 @@
 - [] Header should scroll with the fingers 
 - [] If there are many headers, then the header should scroll appropriately to that length
 - [] GIF showing how the project works 
-- [] Publishing it in WalkIn Github and npm 
+- [] Publishing it in npm
 - [] Add Contributing.md & license for the project(figure out from Pavan) 
 - [] Look at other open source repositories and add tests 
 - [] Npm tags 
@@ -21,7 +21,7 @@
 - Animations and positing of headers 
 
 ## How to use
-Simply install by running `yarn install @walkin-frontend/react-native-dynamic-tab-view`
+Simply install by running `yarn install react-native-dynamic-tab-view`
 
 Use it by 
 
