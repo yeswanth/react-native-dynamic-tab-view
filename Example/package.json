@@ -7,7 +7,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "RNDynamicTabView": "file:../src",
+        "react-native-dynamic-tab-view": "file:../src",
         "react": "16.3.1",
         "react-native": "0.55.2",
         "react-native-dynamic-tab-view": "file:../src"

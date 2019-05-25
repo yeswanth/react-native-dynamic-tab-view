@@ -54,11 +54,16 @@ class DynamicTabViewScrollHeader extends React.Component {
         }
     }
 
+    scrollHeader = (index) => {
+      this.headerView.scrollToIndex({ index, animated: true });
+    }
+
     render() {
         return (
             <FlatList
                 horizontal
                 alwaysBounceHorizontal={false}
+                ref={(headerView) => { this.headerView = headerView }}
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
                 data={this.props.data}
@@ -101,7 +106,7 @@ DynamicTabViewScrollHeader.propTypes = {
     goToPage: PropTypes.func.isRequired,
     selectedTab: PropTypes.number.isRequired,
     tabItemContainerStyle: PropTypes.any,
-    tabItemTextStyle: PropTypes.any, 
+    tabItemTextStyle: PropTypes.any,
     highlightStyle: PropTypes.any,
     noHighlightStyle: PropTypes.any
 }

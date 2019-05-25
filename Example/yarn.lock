@@ -421,9 +421,6 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"RNDynamicTabView@file:../src":
-  version "1.0.0"
-
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
