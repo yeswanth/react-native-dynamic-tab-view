@@ -25,12 +25,12 @@ export default class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      defaultIndex: 0
+      defaultIndex: 5
     }
     this.data = [
       { title: 'Tab1', key: 'item1', color: 'blue' },
-      { title: 'Tab2', key: 'item2', 'color': 'yellow' },
-      { title: 'Tab3', key: 'item3', 'color': 'brown' },
+      { title: 'Tab21212121', key: 'item2', 'color': 'yellow' },
+      { title: 'Tab3222', key: 'item3', 'color': 'brown' },
       { title: 'Tab4', key: 'item4', color: 'blue' },
       { title: 'Tab5', key: 'item5', 'color': 'yellow' },
       { title: 'Tab6', key: 'item6', 'color': 'brown' },
