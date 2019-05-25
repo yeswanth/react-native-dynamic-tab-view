@@ -14,7 +14,7 @@
 
 ### Usecases 
 - Dynamic tab data that is updated after an API call 
-- Non-zero default tab support 
+- Ability to select any index (and just the zeroth index) as the default index. 
 
 ### Yet to come
 - Animations and positing of headers 
