@@ -1,11 +1,11 @@
 ## Open source check-list 
-- [] Header should scroll with the fingers 
-- [] If there are many headers, then the header should scroll appropriately to that length
-- [] GIF showing how the project works 
-- [] Publishing it in npm
-- [] Add Contributing.md & license for the project(figure out from Pavan) 
-- [] Look at other open source repositories and add tests 
-- [] Npm tags 
+- [ ] Header should scroll with the fingers 
+- [ ] If there are many headers, then the header should scroll appropriately to that length
+- [ ] GIF showing how the project works 
+- [ ] Publishing it in npm
+- [ ] Add Contributing.md & license for the project(figure out from Pavan) 
+- [ ] Look at other open source repositories and add tests 
+- [ ] Npm tags 
 
 ## Features 
 - Easy to use and easy to read code
