@@ -1,11 +1,11 @@
 ## Open source check-list 
-- [] Header should scroll with the fingers 
-- [] If there are many headers, then the header should scroll appropriately to that length
-- [] GIF showing how the project works 
-- [] Publishing it in WalkIn Github and npm 
-- [] Add Contributing.md & license for the project(figure out from Pavan) 
-- [] Look at other open source repositories and add tests 
-- [] Npm tags 
+- [ ] Tab view should scroll with gestures 
+- [ ] If there are many headers, then the header should scroll appropriately to that length
+- [ ] GIF showing how the project works 
+- [ ] Publishing it in npm
+- [ ] Add Contributing.md & license for the project(figure out from Pavan) 
+- [ ] Look at other open source repositories and add tests 
+- [ ] Npm tags 
 
 ## Features 
 - Easy to use and easy to read code
@@ -14,19 +14,18 @@
 
 ### Usecases 
 - Dynamic tab data that is updated after an API call 
-- Non-zero default tab support 
+- Ability to select any index (and just the zeroth index) as the default index. 
 
 ### Yet to come
-- TabView content scroll has been disabled (till I add support for the header scrolling smoothly with that of the body)
 - Animations and positing of headers 
 
 ## How to use
-Simply install by running `yarn install @walkin-frontend/react-native-dynamic-tab-view`
+Simply install by running `yarn install react-native-dynamic-tab-view`
 
 Use it by 
 
 ```
-import DynamicTabView from '@walkin-frontend/react-native-dynamic-tab-view';
+import DynamicTabView from 'react-native-dynamic-tab-view';
  <DynamicTabView
         data={dataSource}
         renderTab={renderTab}
