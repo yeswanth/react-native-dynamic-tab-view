@@ -1,5 +1,5 @@
 ## Open source check-list 
-- [ ] Header should scroll with the fingers 
+- [ ] Tab view should scroll with gestures 
 - [ ] If there are many headers, then the header should scroll appropriately to that length
 - [ ] GIF showing how the project works 
 - [ ] Publishing it in npm
