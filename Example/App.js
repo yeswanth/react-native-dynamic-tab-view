@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import DynamicTabView from 'RNDynamicTabView';
+import DynamicTabView from 'react-native-dynamic-tab-view';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
