@@ -1,9 +1,3 @@
-## Open source check-list 
-- [ ] GIF showing how the project works 
-- [ ] Add Contributing.md & license for the project(figure out from Pavan) 
-- [ ] Look at other open source repositories and add tests 
-- [ ] Npm tags 
-
 ## Features 
 - Easy to use and easy to read code
 - No code difference between and Android and iOS 
