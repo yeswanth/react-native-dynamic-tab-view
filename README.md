@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/react-native-dynamic-tab-view.svg)](https://badge.fury.io/js/react-native-dynamic-tab-view)
+
 ## Features 
 - Easy to use and easy to read code
 - React-Native Javascript library built on top of `FlatList`.
