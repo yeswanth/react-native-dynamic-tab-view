@@ -1,10 +1,9 @@
 ## Features 
 - Easy to use and easy to read code
-- No code difference between and Android and iOS 
-- FlatList instead of scrollViews to build tabs 
+- React-Native Javascript library built on top of `FlatList`.
 
 ### Usecases 
-- Dynamic tab data that is updated after an API call 
+- Dynamic tab data that can be populated by code (typically tabs are determined by an API call) 
 - Ability to select any index (and just the zeroth index) as the default index. 
 
 ## How to use
@@ -29,19 +28,27 @@ Here `data` is of the format
 
 ```
 [
-   { title: 'Tab1', key: 'item1', color: 'blue' },
-   { title: 'Tab2', key: 'item2', 'color': 'yellow' },
-   { title: 'Tab3', key: 'item3', 'color': 'brown' },
-
+   { title: 'Tab1', key: 'item1' },
+   { title: 'Tab2', key: 'item2' },
+   { title: 'Tab3', key: 'item3' },
 ]
 ```
+`title` sets the tab title 
+`key` is used internally by React. It can be any unique string
 
 ### Important Props 
-* **data** telling the view what to render.
+* **data** data to tell the number of tabs and set the layout
 * **renderTab** method to render individual tab. It should return a valid React Component 
 * **onChangeTab** callback that will be invoked when a user changes tab 
 * **defaultIndex** index of the tab that will be selected by default. 
-     
+* **containerStyle** style for the dynamic tab view container 
+* **headerContainerStyle** style for header container 
+* **tabItemContainerStyle** style for tab item container.      
+
+### Run the Example project
+1. `cd Example`
+2. `npm install`
+3. `react-native run-android` or `react-native run-ios`
 
 ## FAQs
 
