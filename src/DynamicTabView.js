@@ -27,6 +27,7 @@ class DynamicTabView extends React.Component {
         //HACK
         let wait = new Promise((resolve) => setTimeout(resolve, 100));
         wait.then(() => {
+            this.flatView.scrollToIndex({ index: this.state.index, animated: false });
             this.headerRef.scrollHeader(this.state.index)
         });
     }
@@ -69,7 +70,7 @@ class DynamicTabView extends React.Component {
             if (index < this.props.data.length) {
                 this.goToPage(index);
             }
-        } else if (begin_offset > end_offset || begin_offset === end_offset) {
+        } else if (begin_offset > end_offset) {
             let index = Math.ceil(begin_offset/width) - 1; // if Page scroll from right->left, index is decrease by 1
 
             if (index < this.props.data.length && index >= 0) {
@@ -116,8 +117,6 @@ class DynamicTabView extends React.Component {
                 keyboardDismissMode={'on-drag'}
                 getItemLayout={this.getItemLayout}
                 pagingEnabled={true}
-                initialNumToRender={1}
-                maxToRenderPerBatch={1}
                 onMomentumScrollBegin={this._onCalculateIndex}
                 onScrollBeginDrag={this.onScrollBeginDrag}
                 onScrollEndDrag={this.onScrollEndDrag}
