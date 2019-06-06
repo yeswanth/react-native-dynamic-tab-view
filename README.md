@@ -1,9 +1,3 @@
-## Open source check-list 
-- [ ] GIF showing how the project works 
-- [ ] Add Contributing.md & license for the project(figure out from Pavan) 
-- [ ] Look at other open source repositories and add tests 
-- [ ] Npm tags 
-
 ## Features 
 - Easy to use and easy to read code
 - No code difference between and Android and iOS 
@@ -73,3 +67,5 @@ I have used both of them and I had multitude of issues with them.
 
 ### Contributors 
 * [@yeswanth](https://github.com/yeswanth)
+* [@priyathamv](https://github.com/priyathamv)
+* [@indupal](https://github.com/indupal)
