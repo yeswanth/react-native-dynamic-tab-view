@@ -42,6 +42,7 @@ export default class App extends Component<Props> {
 
 
   _renderItem = (item, index) => {
+    console.log("renderItem",index);
     return (<View
       key={item['key']}
       style={{ backgroundColor: item['color'], flex: 1 }}
@@ -50,7 +51,6 @@ export default class App extends Component<Props> {
   }
 
   onChangeTab = (index) => {
-    console.log(index);
   }
 
   render() {

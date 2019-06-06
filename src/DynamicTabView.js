@@ -27,7 +27,6 @@ class DynamicTabView extends React.Component {
         //HACK
         let wait = new Promise((resolve) => setTimeout(resolve, 100));
         wait.then(() => {
-            this.flatView.scrollToIndex({ index: this.state.index, animated: false });
             this.headerRef.scrollHeader(this.state.index)
         });
     }
@@ -117,6 +116,8 @@ class DynamicTabView extends React.Component {
                 keyboardDismissMode={'on-drag'}
                 getItemLayout={this.getItemLayout}
                 pagingEnabled={true}
+                initialNumToRender={1}
+                maxToRenderPerBatch={1}
                 onMomentumScrollBegin={this._onCalculateIndex}
                 onScrollBeginDrag={this.onScrollBeginDrag}
                 onScrollEndDrag={this.onScrollEndDrag}
