@@ -58,3 +58,6 @@ buck-out/
 .project
 .settings/
 .classpath
+
+# Generating README dynamically
+src/README.md
