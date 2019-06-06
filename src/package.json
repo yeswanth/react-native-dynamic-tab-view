@@ -2,12 +2,9 @@
     "name": "react-native-dynamic-tab-view",
     "version": "1.0.5",
     "main": "index.js",
-    "files": [
-        "src/"
-    ],
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/yeswanth/react-native-dynamic-tab-view",
+        "type": "git",
+        "url": "https://github.com/yeswanth/react-native-dynamic-tab-view",
         "directory": "src/"
     },
     "peerDependencies": {
@@ -26,7 +23,13 @@
     "modulePathIgnorePatterns": [
         "Example"
     ],
-    "keywords": ["react-native","react-native-component","tab-view","tab","dynamic"],
+    "keywords": [
+        "react-native",
+        "react-native-component",
+        "tab-view",
+        "tab",
+        "dynamic"
+    ],
     "scripts": {
         "prepublish": "cp ../README.md ."
     }

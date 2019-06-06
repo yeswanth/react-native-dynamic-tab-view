@@ -61,3 +61,4 @@ buck-out/
 
 # Generating README dynamically
 src/README.md
+src/package-lock.json
