@@ -1,8 +1,6 @@
-import DynamicTabView from './DynamicTabView';
-import DynamicTabViewScrollHeader from './DynamicTabViewScrollHeader';
+import DynamicTabView from "./DynamicTabView";
+import DynamicTabViewScrollHeader from "./DynamicTabViewScrollHeader";
 
-export {
-    DynamicTabViewScrollHeader
-}
+export { DynamicTabViewScrollHeader };
 
 export default DynamicTabView;
