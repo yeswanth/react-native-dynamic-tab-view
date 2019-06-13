@@ -47,9 +47,10 @@ export default class App extends Component<Props> {
         renderTab={this._renderItem}
         defaultIndex={this.state.defaultIndex}
         containerStyle={styles.container}
-        headerBackgroundColor={'green'}
-        tabItemContainerStyle={styles.tabItemContainer}
+        headerBackgroundColor={'white'}
+        headerTextStyle={styles.headerText}
         onChangeTab={this.onChangeTab}
+        headerUnderlayColor={'blue'}
       />
     );
   }
@@ -61,6 +62,9 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     marginTop: 16
+  },
+  headerText: {
+    color:'black'
   },
   tabItemContainer: {
     backgroundColor: "#cf6bab"
