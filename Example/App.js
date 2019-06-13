@@ -20,7 +20,7 @@ export default class App extends Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      defaultIndex: 5
+      defaultIndex: 0
     };
     this.data = [
       { title: "Tab1", key: "item1", color: "blue" },
@@ -47,7 +47,7 @@ export default class App extends Component<Props> {
         renderTab={this._renderItem}
         defaultIndex={this.state.defaultIndex}
         containerStyle={styles.container}
-        headerContainerStyle={styles.headerContainer}
+        headerBackgroundColor={'green'}
         tabItemContainerStyle={styles.tabItemContainer}
         onChangeTab={this.onChangeTab}
       />
