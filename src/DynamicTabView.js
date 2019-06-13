@@ -115,6 +115,8 @@ class DynamicTabView extends React.Component {
           goToPage={this.goToPage}
           selectedTab={this.state.index}
           headerBackgroundColor={this.props.headerBackgroundColor}
+          headerTextStyle={this.props.headerTextStyle}
+          headerUnderlayColor={this.props.headerUnderlayColor}
         />
       </View>
     );
@@ -177,8 +179,7 @@ DynamicTabView.defaultProps = {
   headerContainerStyle: {},
 
   //styles for header
-  tabItemContainerStyle: {},
-  tabItemTextStyle: {},
+  headerTextStyle: {},
   highlightStyle: {},
   noHighlightStyle: {}
 };
@@ -191,9 +192,10 @@ DynamicTabView.propTypes = {
   headerContainerStyle: PropTypes.any,
   //header style props
   headerBackgroundColor: PropTypes.any,
-  tabItemTextStyle: PropTypes.any,
+  headerTextStyle: PropTypes.any,
   highlightStyle: PropTypes.any,
-  noHighlightStyle: PropTypes.any
+  noHighlightStyle: PropTypes.any,
+  headerUnderlayColor: PropTypes.any,
 };
 
 export default DynamicTabView;

@@ -37,7 +37,7 @@ class DynamicTabViewScrollHeader extends React.Component {
             style={[
               { fontWeight: fontWeight },
               this.defaultStyle.tabItemText,
-              this.props.tabItemTextStyle
+              this.props.headerTextStyle
             ]}
           >
             {item["title"]}
@@ -52,7 +52,11 @@ class DynamicTabViewScrollHeader extends React.Component {
     if (showHighlight) {
       return (
         <View
-          style={[this.defaultStyle.highlight, this.props.highlightStyle]}
+          style={[
+            this.defaultStyle.highlight,
+            this.props.highlightStyle,
+            { backgroundColor: this.props.headerUnderlayColor }
+          ]}
         />
       );
     } else {
@@ -117,16 +121,18 @@ DynamicdefaultStyle = {
 
 DynamicTabViewScrollHeader.defaultProps = {
   selectedTab: 0,
-  headerBackgroundColor: "#555555"
+  headerBackgroundColor: "#555555",
+  headerUnderlayColor: "#00000033"
 };
 
 DynamicTabViewScrollHeader.propTypes = {
   goToPage: PropTypes.func.isRequired,
   selectedTab: PropTypes.number.isRequired,
   headerBackgroundColor: PropTypes.any,
-  tabItemTextStyle: PropTypes.any,
+  headerTextStyle: PropTypes.any,
   highlightStyle: PropTypes.any,
-  noHighlightStyle: PropTypes.any
+  noHighlightStyle: PropTypes.any,
+  headerUnderlayColor: PropTypes.any
 };
 
 export default DynamicTabViewScrollHeader;
