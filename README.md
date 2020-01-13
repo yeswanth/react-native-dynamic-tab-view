@@ -53,7 +53,8 @@ Here `data` is of the format
 2. `npm install`
 3. `react-native run-android` or `react-native run-ios`
 
-or try expo: https://snack.expo.io/@har2008preet/vigorous-apples
+
+or try expo: [Dynamic Tab View Example](https://snack.expo.io/@har2008preet/vigorous-apples)
 
 ## FAQs
 
@@ -81,3 +82,4 @@ I have used both of them and I had multitude of issues with them.
 * [@yeswanth](https://github.com/yeswanth)
 * [@priyathamv](https://github.com/priyathamv)
 * [@indupal](https://github.com/indupal)
+* [@har2008preet](https://github.com/har2008preet) - Expo Example
