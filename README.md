@@ -53,6 +53,8 @@ Here `data` is of the format
 2. `npm install`
 3. `react-native run-android` or `react-native run-ios`
 
+or try expo: https://snack.expo.io/@har2008preet/vigorous-apples
+
 ## FAQs
 
 ### Why are you building another TabView library? 
