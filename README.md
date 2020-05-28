@@ -9,7 +9,7 @@
 - Ability to select any index (and just the zeroth index) as the default index. 
 
 ## How to use
-Simply install by running `yarn install react-native-dynamic-tab-view`
+Simply install by running `yarn add react-native-dynamic-tab-view`
 
 Use it by 
 
