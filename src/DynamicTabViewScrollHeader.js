@@ -5,23 +5,14 @@ class DynamicTabViewScrollHeader extends React.Component {
   constructor(props) {
     super(props);
     this.defaultStyle = DynamicdefaultStyle;
-    this.state = {
-      selected: this.props.selectedTab
-    };
   }
 
   _onPressHeader = index => {
     this.props.goToPage(index);
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedTab !== this.props.selectedTab) {
-      this.setState({ selected: nextProps.selectedTab });
-    }
-  }
-
   _renderTitle = ({ item, index }) => {
-    let isTabActive = index === this.state.selected;
+    let isTabActive = index === this.props.selectedTab;
     let fontWeight = isTabActive ? "bold" : "normal";
     return (
       <TouchableHighlight
@@ -83,7 +74,6 @@ class DynamicTabViewScrollHeader extends React.Component {
         bounces={false}
         showsHorizontalScrollIndicator={false}
         data={this.props.data}
-        extraData={this.state}
         renderItem={this._renderTitle}
         style={[
           this.defaultStyle.headerStyle,
