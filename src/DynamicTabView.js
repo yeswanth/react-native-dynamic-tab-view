@@ -49,43 +49,60 @@ class DynamicTabView extends React.Component {
 
   onScrollBeginDrag = e => {
     var begin_offset = e.nativeEvent.contentOffset.x; //since horizontal scroll view begin
-    // console.log(begin_offset);
+    console.log("DynamicTabView == onScrollBeginDrag begin_offset ",begin_offset);
     this.setState({ begin_offset });
   };
 
   onScrollEndDrag = e => {
     var end_offset = e.nativeEvent.contentOffset.x; // since horizontal scroll view end
-    // console.log(end_offset)
+    console.log("DynamicTabView == onScrollEndDrag end offset",end_offset)
     this.setState({ end_offset });
   };
 
   // To calculate Page scroll from left->right or right->left
-  _onCalculateIndex = (begin_offset, end_offset, width) => {
-    var begin_offset = this.state.begin_offset;
-    var end_offset = this.state.end_offset;
-    var width = this.state.containerWidth;
+  // _onCalculateIndex = (begin_offset, end_offset, width) => {
+  //   var begin_offset = this.state.begin_offset;
+  //   var end_offset = this.state.end_offset;
+  //   var width = this.state.containerWidth;
 
-    if (begin_offset < end_offset) {
-      let index = Math.floor(begin_offset / width) + 1; // if Page scroll from left->right, index is increase by 1
+  //   // console.log("DynamicTabView == _onCalculateIndex end_offset ",end_offset)
+  //   // console.log("DynamicTabView == _onCalculateIndex begin_offset ",begin_offset)
+  //   // console.log("DynamicTabView == _onCalculateIndex width ",width)
 
-      if (index < this.props.data.length) {
-        this.goToPage(index);
-      }
-    } else if (begin_offset > end_offset) {
-      let index = Math.ceil(begin_offset / width) - 1; // if Page scroll from right->left, index is decrease by 1
 
-      if (index < this.props.data.length && index >= 0) {
-        this.goToPage(index);
-      }
-    }
-  };
+  //   console.log("DynamicTabView == _onCalculateIndex end_offset - begin_offset ", end_offset - begin_offset)
+  //   console.log("DynamicTabView == _onCalculateIndex width / 2 ", width / 2)
+
+  //   if (end_offset - begin_offset >= width/2) {
+  //     let index = Math.floor(begin_offset / width) + 1; // if Page scroll from left->right, index is increase by 1
+  //     if (index < this.props.data.length) {
+  //       this.goToPage(index);
+  //     }
+  //   } else if (begin_offset - end_offset >= width / 2) {
+  //     let index = Math.ceil(begin_offset / width) - 1; // if Page scroll from right->left, index is decrease by 1
+  //     if (index < this.props.data.length && index >= 0) {
+  //       this.goToPage(index);
+  //     }
+  //   }
+  // };
+
+  onScrollEnd = (e) => {
+    let contentOffset = e.nativeEvent.contentOffset;
+    let viewSize = e.nativeEvent.layoutMeasurement;
+    let pageNum = Math.floor(contentOffset.x / viewSize.width);
+    this.goToPage(pageNum);
+  }
 
   _onLayout = e => {
+
     const { width } = e.nativeEvent.layout;
+    console.log("DynamicTabView == _onLayout width",width)
+
     this.setState({ containerWidth: width });
   };
 
   _renderTab = ({ item, index }) => {
+    console.log("DynamicTabView == _renderTab index = ", index)
     return (
       <View
         style={[
@@ -100,6 +117,7 @@ class DynamicTabView extends React.Component {
   };
 
   _renderHeader = () => {
+    console.log("DynamicTabView _renderHeader")
     return (
       <View
         style={[
@@ -117,7 +135,6 @@ class DynamicTabView extends React.Component {
           headerBackgroundColor={this.props.headerBackgroundColor}
           headerTextStyle={this.props.headerTextStyle}
           headerUnderlayColor={this.props.headerUnderlayColor}
-          highlightStyle={this.props.highlightStyle}
         />
       </View>
     );
@@ -137,15 +154,17 @@ class DynamicTabView extends React.Component {
           ref={flatView => {
             this.flatView = flatView;
           }}
+          showsHorizontalScrollIndicator={false}
           styleCustomization={this.props.styleCustomization}
           renderItem={this._renderTab}
           scrollEventThrottle={10}
           keyboardDismissMode={"on-drag"}
           getItemLayout={this.getItemLayout}
           pagingEnabled={true}
-          onMomentumScrollBegin={this._onCalculateIndex}
-          onScrollBeginDrag={this.onScrollBeginDrag}
-          onScrollEndDrag={this.onScrollEndDrag}
+          // onMomentumScrollBegin={this._onCalculateIndex}
+          onMomentumScrollEnd={this.onScrollEnd}
+          // onScrollBeginDrag={this.onScrollBeginDrag}
+          // onScrollEndDrag={this.onScrollEndDrag}
         />
       </View>
     );

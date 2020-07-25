@@ -1,10 +1,10 @@
 {
-    "name": "react-native-dynamic-tab-view",
-    "version": "1.0.6-0",
+    "name": "react-native-top-tabs",
+    "version": "1.0.0",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/yeswanth/react-native-dynamic-tab-view",
+        "url": "https://github.com/maherzaidoune/react-native-dynamic-tab-view",
         "directory": "src/"
     },
     "peerDependencies": {
