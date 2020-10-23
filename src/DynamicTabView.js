@@ -194,6 +194,7 @@ DynamicTabView.propTypes = {
   //header style props
   headerBackgroundColor: PropTypes.any,
   headerTextStyle: PropTypes.any,
+  headerActiveTextStyle: PropTypes.any,
   highlightStyle: PropTypes.any,
   noHighlightStyle: PropTypes.any,
   headerUnderlayColor: PropTypes.any,
