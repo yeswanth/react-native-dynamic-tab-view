@@ -116,6 +116,7 @@ class DynamicTabView extends React.Component {
           selectedTab={this.state.index}
           headerBackgroundColor={this.props.headerBackgroundColor}
           headerTextStyle={this.props.headerTextStyle}
+          headerActiveTextStyle={this.props.headerActiveTextStyle}
           headerUnderlayColor={this.props.headerUnderlayColor}
           highlightStyle={this.props.highlightStyle}
         />
@@ -194,6 +195,7 @@ DynamicTabView.propTypes = {
   //header style props
   headerBackgroundColor: PropTypes.any,
   headerTextStyle: PropTypes.any,
+  headerActiveTextStyle: PropTypes.any,
   highlightStyle: PropTypes.any,
   noHighlightStyle: PropTypes.any,
   headerUnderlayColor: PropTypes.any,

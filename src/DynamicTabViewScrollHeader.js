@@ -14,7 +14,7 @@ class DynamicTabViewScrollHeader extends React.Component {
     this.props.goToPage(index);
   };
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectedTab !== this.props.selectedTab) {
       this.setState({ selected: nextProps.selectedTab });
     }
@@ -37,7 +37,7 @@ class DynamicTabViewScrollHeader extends React.Component {
             style={[
               { fontWeight: fontWeight },
               this.defaultStyle.tabItemText,
-              this.props.headerTextStyle
+              isTabActive ? this.props.headerActiveTextStyle : this.props.headerTextStyle
             ]}
           >
             {item["title"]}
