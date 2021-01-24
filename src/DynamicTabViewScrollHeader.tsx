@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import { Button, TouchableHighlight, Text, FlatList, View, StyleSheet, ColorValue } from 'react-native';
 import PropTypes from 'prop-types';
 export interface DynamicTabViewScrollProps {
@@ -12,12 +12,13 @@ export interface DynamicTabViewScrollProps {
 	noHighlightStyle: StyleSheet,
 	data: any,
 	extraData: any,
+	scrollFlatRef: RefObject<FlatList>
 }
 const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) => {
-	const { selectedTab, headerBackgroundColor, headerActiveTextStyle, headerTextStyle, highlightStyle, headerUnderlayColor, noHighlightStyle, data, extraData, ...restProps } = props;
+	const { selectedTab, headerBackgroundColor, headerActiveTextStyle, headerTextStyle, highlightStyle, headerUnderlayColor, noHighlightStyle, data, extraData, scrollFlatRef, ...restProps } = props;
 	const [selected, setSelected] = React.useState(selectedTab);
 
-	const onPressHeader = index => {
+	const onPressHeader = (item, index) => {
 		props.goToPage(index);
 	};
 	const renderHighlight = showHighlight => {
@@ -44,7 +45,7 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 		let fontWeight = isTabActive ? "bold" : "normal";
 		return (
 			<TouchableHighlight
-				onPress={onPressHeader}
+				onPress={() => onPressHeader(item, index)}
 				style={[
 					styles.tabItemContainer,
 					{ backgroundColor: headerBackgroundColor }
@@ -70,12 +71,10 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 		<FlatList
 			horizontal
 			alwaysBounceHorizontal={false}
-			ref={headerView => {
-				headerView = headerView;
-			}}
 			bounces={false}
 			showsHorizontalScrollIndicator={false}
 			data={data}
+			ref={scrollFlatRef}
 			extraData={extraData}
 			renderItem={renderTitle}
 			style={[

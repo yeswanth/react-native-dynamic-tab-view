@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   StyleSheet,
   ColorValue,
-  TextStyle
+  TextStyle, Text
 } from 'react-native';
 import DynamicTabViewScrollHeader from './DynamicTabViewScrollHeader';
 import PropTypes from 'prop-types';
@@ -21,10 +21,11 @@ export interface DynamicTabProps {
   headerUnderlayColor: ColorValue,
   highlightStyle: StyleSheet,
   data: any,
-  styleCustomization: any,
   tabContainerStyle: StyleSheet
   noHighlightStyle: StyleSheet,
-  extraData: any
+  extraData: any,
+  renderTab: CallableFunction,
+  onChangeTab: CallableFunction
 }
 const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
   const { containerStyle,
@@ -34,7 +35,6 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
     headerActiveTextStyle,
     headerUnderlayColor,
     highlightStyle,
-    styleCustomization,
     tabContainerStyle,
     noHighlightStyle,
     extraData,
@@ -43,8 +43,8 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
   const [containerWidth, setContainerWidth] = React.useState(Dimensions.get("window").width);
   const [beginOffset, setBeginOffset] = React.useState(null);
   const [endOffset, setEndOffset] = React.useState(null);
-  let flatView;
-  let headerRef;
+  const flatListRef = React.useRef(null);
+  const scrollHeaderRef = React.useRef(null);
   const getItemLayout = (data, index) => ({
     length: containerWidth,
     offset: containerWidth * index,
@@ -53,12 +53,14 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
 
   const goToPage = index => {
     setIndex(index)
-    flatView.scrollToIndex({ index });
-    /*if (this.props.onChangeTab) {
-      this.props.onChangeTab(index);
-    }*/
 
-    headerRef.scrollHeader(index);
+    flatListRef?.current?.scrollToIndex({ index });
+
+    if (props.onChangeTab) {
+      props.onChangeTab(index);
+    }
+    //console.log(scrollHeaderRef?.current);
+    scrollHeaderRef?.current?.scrollHeader(index);
   };
 
   const onScrollBeginDrag = e => {
@@ -88,6 +90,7 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
         <DynamicTabViewScrollHeader
           data={data}
           goToPage={goToPage}
+          scrollFlatRef={scrollHeaderRef}
           selectedTab={index}
           headerBackgroundColor={headerBackgroundColor}
           headerTextStyle={headerTextStyle}
@@ -100,7 +103,13 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       </View>
     );
   };
-  const RenderTab = ({ item }) => {
+  const onScrollEnd = (e) => {
+    let contentOffset = e.nativeEvent.contentOffset;
+    let viewSize = e.nativeEvent.layoutMeasurement;
+    let pageNum = Math.floor(contentOffset.x / viewSize.width);
+    goToPage(pageNum);
+  }
+  const RenderTab = ({ item, index }) => {
     return (
       <View
         style={[
@@ -109,7 +118,7 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
           tabContainerStyle
         ]}
       >
-        {item}
+        {props.renderTab(item, index)}
       </View>
     );
   };
@@ -118,20 +127,21 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       onLayout={onLayout}
       style={[styles.container, containerStyle]}
     >
-      {RenderHeader}
+      {RenderHeader()}
       <FlatList
-        {...props}
+        data={data}
         horizontal
+        ref={flatListRef}
         scrollEnabled={true}
-        // styleCustomization={styleCustomization}
-        renderItem={({ item }) => RenderTab(item)}
+        showsHorizontalScrollIndicator={false}
+        renderItem={RenderTab}
         scrollEventThrottle={10}
         keyboardDismissMode={"on-drag"}
-        getItemLayout={getItemLayout}
         pagingEnabled={true}
-      //onMomentumScrollBegin={this._onCalculateIndex}
-      //onScrollBeginDrag={this.onScrollBeginDrag}
-      //onScrollEndDrag={this.onScrollEndDrag}
+        getItemLayout={getItemLayout}
+        onScrollBeginDrag={onScrollBeginDrag}
+        onScrollEndDrag={onScrollEndDrag}
+        onMomentumScrollEnd={onScrollEnd}
       />
     </View>
   );
