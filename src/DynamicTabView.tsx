@@ -1,13 +1,10 @@
 import React from 'react';
 import {
-  ScrollView,
   View,
   Dimensions,
   FlatList,
-  TouchableHighlight,
   StyleSheet,
   ColorValue,
-  TextStyle, Text
 } from 'react-native';
 import DynamicTabViewScrollHeader from './DynamicTabViewScrollHeader';
 import PropTypes from 'prop-types';
@@ -41,40 +38,33 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
     data, ...restProps } = props;
   const [index, setIndex] = React.useState(props.defaultIndex ? props.defaultIndex : 0);
   const [containerWidth, setContainerWidth] = React.useState(Dimensions.get("window").width);
-  const [beginOffset, setBeginOffset] = React.useState(null);
-  const [endOffset, setEndOffset] = React.useState(null);
+  const viewConfigRef = React.useRef({
+    viewAreaCoveragePercentThreshold: 60,
+  })
   const flatListRef = React.useRef(null);
   const scrollHeaderRef = React.useRef(null);
+  const [isRunWithOnPress, setIsRunWithOnPress] = React.useState(false);
   const getItemLayout = (data, index) => ({
     length: containerWidth,
     offset: containerWidth * index,
     index
   });
 
-  const goToPage = index => {
-    setIndex(index)
-
+  const goToPage = (index, withOnPress) => {
     flatListRef?.current?.scrollToIndex({ index });
-
+    scrollHeaderRef?.current?.scrollToIndex({ index });
     if (props.onChangeTab) {
       props.onChangeTab(index);
     }
-    //console.log(scrollHeaderRef?.current);
-    scrollHeaderRef?.current?.scrollHeader(index);
+    setIndex(index)
+    setIsRunWithOnPress(withOnPress)
   };
+  const onViewableItemsChanged = React.useRef(({ viewableItems, changed }) => {
+    if (viewableItems && viewableItems.length > 0 && !isRunWithOnPress) {
+      goToPage(viewableItems[0].index, false)
+    }
 
-  const onScrollBeginDrag = e => {
-    let beginOffset = e.nativeEvent.contentOffset.x; //since horizontal scroll view begin
-    // console.log(begin_offset);
-    setBeginOffset(beginOffset)
-  };
-
-  const onScrollEndDrag = e => {
-    let endOffset = e.nativeEvent.contentOffset.x; // since horizontal scroll view end
-    // console.log(end_offset)
-    setEndOffset(endOffset)
-  };
-
+  });
   const onLayout = e => {
     const { width } = e.nativeEvent.layout;
     setContainerWidth(width)
@@ -90,7 +80,7 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
         <DynamicTabViewScrollHeader
           data={data}
           goToPage={goToPage}
-          scrollFlatRef={scrollHeaderRef}
+          scrollHeaderRef={scrollHeaderRef}
           selectedTab={index}
           headerBackgroundColor={headerBackgroundColor}
           headerTextStyle={headerTextStyle}
@@ -103,12 +93,6 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       </View>
     );
   };
-  const onScrollEnd = (e) => {
-    let contentOffset = e.nativeEvent.contentOffset;
-    let viewSize = e.nativeEvent.layoutMeasurement;
-    let pageNum = Math.floor(contentOffset.x / viewSize.width);
-    goToPage(pageNum);
-  }
   const RenderTab = ({ item, index }) => {
     return (
       <View
@@ -131,6 +115,7 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       <FlatList
         data={data}
         horizontal
+        keyExtractor={(item, index) => index.toString()}
         ref={flatListRef}
         scrollEnabled={true}
         showsHorizontalScrollIndicator={false}
@@ -139,9 +124,8 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
         keyboardDismissMode={"on-drag"}
         pagingEnabled={true}
         getItemLayout={getItemLayout}
-        onScrollBeginDrag={onScrollBeginDrag}
-        onScrollEndDrag={onScrollEndDrag}
-        onMomentumScrollEnd={onScrollEnd}
+        onViewableItemsChanged={onViewableItemsChanged.current}
+        viewabilityConfig={viewConfigRef.current}
       />
     </View>
   );
