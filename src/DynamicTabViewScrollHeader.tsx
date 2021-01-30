@@ -1,9 +1,9 @@
 import React, { RefObject } from 'react';
-import { Button, TouchableHighlight, Text, FlatList, View, StyleSheet, ColorValue } from 'react-native';
+import { Animated, TouchableHighlight, Text, FlatList, View, StyleSheet, ColorValue } from 'react-native';
 import PropTypes from 'prop-types';
 export interface DynamicTabViewScrollProps {
 	selectedTab: Number,
-	goToPage: CallableFunction,
+	pressHeader: CallableFunction,
 	headerBackgroundColor: ColorValue,
 	headerActiveTextStyle: StyleSheet,
 	headerTextStyle: StyleSheet,
@@ -16,20 +16,29 @@ export interface DynamicTabViewScrollProps {
 }
 const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) => {
 	const { selectedTab, headerBackgroundColor, headerActiveTextStyle, headerTextStyle, highlightStyle, headerUnderlayColor, noHighlightStyle, data, extraData, scrollHeaderRef, ...restProps } = props;
+	const [translateValue, setTranslateValue] = React.useState(new Animated.Value(0));
+	const [headerWidth, setHeaderWidth] = React.useState(0);
 
 	const onPressHeader = (item, index) => {
-		props.goToPage(index, true);
+		console.log(item)
+		const tabWidth = headerWidth / data.length;
+		Animated.spring(translateValue, {
+			toValue: index * tabWidth,
+			velocity: 10,
+			useNativeDriver: true,
+		}).start();
+		props.pressHeader(index);
 	};
+
 	const renderHighlight = showHighlight => {
 		if (showHighlight) {
 			return (
-				<View
-					style={[
-						styles.highlight,
-						highlightStyle,
-						{ backgroundColor: headerUnderlayColor }
-					]}
+				<Animated.View
+					style={[styles.highlight, highlightStyle, {
+						transform: [{ translateX: translateValue }]
+					}]}
 				/>
+
 			);
 		} else {
 			return (
@@ -66,9 +75,13 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 			</TouchableHighlight>
 		);
 	};
+	const _onLayoutEvent = (event) => {
+		setHeaderWidth(event.nativeEvent.layout.width)
+	}
 	return (
 		<FlatList
 			horizontal
+			onLayout={_onLayoutEvent}
 			alwaysBounceHorizontal={false}
 			bounces={false}
 			showsHorizontalScrollIndicator={false}

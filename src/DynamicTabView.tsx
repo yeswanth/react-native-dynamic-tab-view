@@ -36,35 +36,42 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
     noHighlightStyle,
     extraData,
     data, ...restProps } = props;
-  const [index, setIndex] = React.useState(props.defaultIndex ? props.defaultIndex : 0);
+  const [selectedIndex, setSelectedIndex] = React.useState(props.defaultIndex ? props.defaultIndex : 0);
   const [containerWidth, setContainerWidth] = React.useState(Dimensions.get("window").width);
-  const viewConfigRef = React.useRef({
-    viewAreaCoveragePercentThreshold: 60,
-  })
+  const _viewabilityConfig = {
+    itemVisiblePercentThreshold: 90,
+    minimumViewTime: 50
+  }
   const flatListRef = React.useRef(null);
   const scrollHeaderRef = React.useRef(null);
-  const [isRunWithOnPress, setIsRunWithOnPress] = React.useState(false);
+
   const getItemLayout = (data, index) => ({
     length: containerWidth,
     offset: containerWidth * index,
     index
   });
 
-  const goToPage = (index, withOnPress) => {
+  const pressHeader = (index) => {
     flatListRef?.current?.scrollToIndex({ index });
-    scrollHeaderRef?.current?.scrollToIndex({ index });
-    if (props.onChangeTab) {
-      props.onChangeTab(index);
-    }
-    setIndex(index)
-    setIsRunWithOnPress(withOnPress)
-  };
-  const onViewableItemsChanged = React.useRef(({ viewableItems, changed }) => {
-    if (viewableItems && viewableItems.length > 0 && !isRunWithOnPress) {
-      goToPage(viewableItems[0].index, false)
-    }
+    changeHeaderScrollPosition(index)
+  }
+  const changeHeaderScrollPosition = (index) => {
+    scrollHeaderRef?.current?.scrollToIndex({ animated: true, index });
+  }
 
-  });
+  const _onViewableItemsChanged = React.useCallback(({ viewableItems, changed }) => {
+
+    if (viewableItems && viewableItems.length > 0) {
+      console.log(changed)
+      setSelectedIndex(viewableItems[0].index)
+      changeHeaderScrollPosition(viewableItems[0].index)
+      if (props.onChangeTab) {
+        props.onChangeTab(viewableItems[0].index);
+      }
+
+    }
+  }, []);
+
   const onLayout = e => {
     const { width } = e.nativeEvent.layout;
     setContainerWidth(width)
@@ -79,9 +86,9 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       >
         <DynamicTabViewScrollHeader
           data={data}
-          goToPage={goToPage}
+          pressHeader={pressHeader}
           scrollHeaderRef={scrollHeaderRef}
-          selectedTab={index}
+          selectedTab={selectedIndex}
           headerBackgroundColor={headerBackgroundColor}
           headerTextStyle={headerTextStyle}
           headerActiveTextStyle={headerActiveTextStyle}
@@ -124,8 +131,8 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
         keyboardDismissMode={"on-drag"}
         pagingEnabled={true}
         getItemLayout={getItemLayout}
-        onViewableItemsChanged={onViewableItemsChanged.current}
-        viewabilityConfig={viewConfigRef.current}
+        onViewableItemsChanged={_onViewableItemsChanged}
+        viewabilityConfig={_viewabilityConfig}
       />
     </View>
   );
