@@ -38,10 +38,11 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
     data, ...restProps } = props;
   const [selectedIndex, setSelectedIndex] = React.useState(props.defaultIndex ? props.defaultIndex : 0);
   const [containerWidth, setContainerWidth] = React.useState(Dimensions.get("window").width);
-  const _viewabilityConfig = {
+  const viewConfigRef = React.useRef({
     itemVisiblePercentThreshold: 90,
-    minimumViewTime: 50
-  }
+    minimumViewTime: 100
+  })
+
   const flatListRef = React.useRef(null);
   const scrollHeaderRef = React.useRef(null);
 
@@ -59,10 +60,10 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
     scrollHeaderRef?.current?.scrollToIndex({ animated: true, index });
   }
 
-  const _onViewableItemsChanged = React.useCallback(({ viewableItems, changed }) => {
+  const onViewRef = React.useRef(({ viewableItems, changed }) => {
 
     if (viewableItems && viewableItems.length > 0) {
-      console.log(changed)
+      console.log(viewableItems)
       setSelectedIndex(viewableItems[0].index)
       changeHeaderScrollPosition(viewableItems[0].index)
       if (props.onChangeTab) {
@@ -70,7 +71,8 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
       }
 
     }
-  }, []);
+  })
+
 
   const onLayout = e => {
     const { width } = e.nativeEvent.layout;
@@ -131,8 +133,8 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
         keyboardDismissMode={"on-drag"}
         pagingEnabled={true}
         getItemLayout={getItemLayout}
-        onViewableItemsChanged={_onViewableItemsChanged}
-        viewabilityConfig={_viewabilityConfig}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
       />
     </View>
   );

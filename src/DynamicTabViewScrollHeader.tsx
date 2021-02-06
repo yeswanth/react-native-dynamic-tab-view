@@ -16,27 +16,31 @@ export interface DynamicTabViewScrollProps {
 }
 const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) => {
 	const { selectedTab, headerBackgroundColor, headerActiveTextStyle, headerTextStyle, highlightStyle, headerUnderlayColor, noHighlightStyle, data, extraData, scrollHeaderRef, ...restProps } = props;
-	const [translateValue, setTranslateValue] = React.useState(new Animated.Value(0));
-	const [headerWidth, setHeaderWidth] = React.useState(0);
-	const tabWidth = headerWidth / data.length;
 	const onPressHeader = (item, index) => {
 		console.log(index)
 		props.pressHeader(index);
-		Animated.spring(translateValue, {
-			toValue: index * tabWidth,
-			velocity: 10,
-			useNativeDriver: true,
-		}).start();
 
 	};
-
+	const renderHighlight = showHighlight => {
+		if (showHighlight) {
+			return (
+				<View
+					style={[styles.highlight, highlightStyle]}
+				/>
+			);
+		} else {
+			return (
+				<View
+					style={[styles.noHighlight, noHighlightStyle]}
+				/>
+			);
+		}
+	};
 	const renderTitle = ({ item, index }) => {
 		let isTabActive = index === selectedTab;
 		let fontWeight = isTabActive ? "bold" : "normal";
 		return (
 			<View>
-
-
 				<TouchableHighlight
 					onPress={() => onPressHeader(item, index)}
 					style={[
@@ -55,45 +59,29 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 						>
 							{item["title"]}
 						</Text>
+						{renderHighlight(isTabActive)}
 					</View>
 				</TouchableHighlight>
 			</View>
 
 		);
 	};
-	const _onLayoutEvent = (event) => {
-		setHeaderWidth(event.nativeEvent.layout.width)
-	}
 	return (
-		<View style={styles.contentContainer}>
-			<View style={styles.animateContainer}>
-				<Animated.View
-					style={[
-						styles.slider,
-						{
-							transform: [{ translateX: translateValue }],
-							width: 40,
-						},
-					]}
-				/>
-			</View>
 
-			<FlatList
-				horizontal
-				onLayout={_onLayoutEvent}
-				alwaysBounceHorizontal={false}
-				bounces={false}
-				showsHorizontalScrollIndicator={false}
-				data={data}
-				ref={scrollHeaderRef}
-				extraData={extraData}
-				renderItem={renderTitle}
-				style={[
-					styles.headerStyle,
-					{ backgroundColor: headerBackgroundColor }
-				]}
-			/>
-		</View>
+		<Animated.FlatList
+			horizontal
+			alwaysBounceHorizontal={false}
+			bounces={false}
+			showsHorizontalScrollIndicator={false}
+			data={data}
+			ref={scrollHeaderRef}
+			extraData={extraData}
+			renderItem={renderTitle}
+			style={[
+				styles.headerStyle,
+				{ backgroundColor: headerBackgroundColor }
+			]}
+		/>
 
 	);
 };
