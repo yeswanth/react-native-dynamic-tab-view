@@ -1,6 +1,5 @@
 import React, { RefObject } from 'react';
 import { Animated, TouchableHighlight, Text, FlatList, View, StyleSheet, ColorValue } from 'react-native';
-import PropTypes from 'prop-types';
 export interface DynamicTabViewScrollProps {
 	selectedTab: Number,
 	pressHeader: CallableFunction,
@@ -17,9 +16,7 @@ export interface DynamicTabViewScrollProps {
 const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) => {
 	const { selectedTab, headerBackgroundColor, headerActiveTextStyle, headerTextStyle, highlightStyle, headerUnderlayColor, noHighlightStyle, data, extraData, scrollHeaderRef, ...restProps } = props;
 	const onPressHeader = (item, index) => {
-		console.log(index)
 		props.pressHeader(index);
-
 	};
 	const renderHighlight = showHighlight => {
 		if (showHighlight) {
@@ -63,11 +60,9 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 					</View>
 				</TouchableHighlight>
 			</View>
-
 		);
 	};
 	return (
-
 		<Animated.FlatList
 			horizontal
 			alwaysBounceHorizontal={false}
@@ -87,9 +82,6 @@ const DynamicTabViewScrollHeader: React.FC<DynamicTabViewScrollProps> = (props) 
 };
 
 const styles: any = StyleSheet.create({
-	headerContainer: {
-		height: 80
-	},
 	tabItemText: {
 		color: "white"
 	},
@@ -104,24 +96,13 @@ const styles: any = StyleSheet.create({
 		backgroundColor: "white",
 		paddingHorizontal: 10,
 		paddingVertical: 2,
-		marginTop: 5
+		marginTop: 5,
+		borderRadius: 10
 	},
 	noHighlight: {
 		paddingHorizontal: 10,
 		paddingVertical: 2,
 		marginTop: 5
-	},
-	slider: {
-		height: 5,
-		paddingHorizontal: 10,
-		paddingVertical: 2,
-		position: 'absolute',
-		top: 50,
-		backgroundColor: 'white',
-		borderRadius: 10
-	},
-	animateContainer: {
-		zIndex: 5,
 	}
 });
 

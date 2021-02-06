@@ -7,7 +7,6 @@ import {
   ColorValue,
 } from 'react-native';
 import DynamicTabViewScrollHeader from './DynamicTabViewScrollHeader';
-import PropTypes from 'prop-types';
 export interface DynamicTabProps {
   defaultIndex: Number,
   containerStyle: StyleSheet,
@@ -61,15 +60,12 @@ const DynamicTabView: React.FC<DynamicTabProps> = (props) => {
   }
 
   const onViewRef = React.useRef(({ viewableItems, changed }) => {
-
     if (viewableItems && viewableItems.length > 0) {
-      console.log(viewableItems)
       setSelectedIndex(viewableItems[0].index)
       changeHeaderScrollPosition(viewableItems[0].index)
       if (props.onChangeTab) {
         props.onChangeTab(viewableItems[0].index);
       }
-
     }
   })
 
@@ -151,15 +147,6 @@ const styles: any = StyleSheet.create({
   tabContainer: {
     flex: 1
   },
-  labelStyle: {
-    color: "white"
-  },
-  indicatorStyle: {
-    backgroundColor: "white",
-    marginVertical: 1,
-    bottom: 4, //indicatorStyle is implemented in absolute in the library
-    height: 4
-  }
 });
 
 export default DynamicTabView;
