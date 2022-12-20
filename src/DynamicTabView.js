@@ -134,7 +134,7 @@ class DynamicTabView extends React.Component {
         <FlatList
           {...this.props}
           horizontal
-          scrollEnabled={true}
+          scrollEnabled={this.props.swipeToPage}
           ref={flatView => {
             this.flatView = flatView;
           }}
@@ -179,6 +179,7 @@ DynamicTabView.defaultProps = {
   containerStyle: {},
   tabContainerStyle: {},
   headerContainerStyle: {},
+  swipeToPage: true,
 
   //styles for header
   headerTextStyle: {},
