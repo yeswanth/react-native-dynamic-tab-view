@@ -47,6 +47,7 @@ Here `data` is of the format
 * **headerBackgroundColor** background color for header 
 * **headerUnderlayColor** Color for header underlay
 * **headerTextStyle** style for header text
+* **swipeToPage** Enable the swipe gesture for moving between tabs.  Default true.
 
 ### Run the Example project
 1. `cd Example`
