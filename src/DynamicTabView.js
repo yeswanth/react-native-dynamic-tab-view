@@ -119,6 +119,7 @@ class DynamicTabView extends React.Component {
           headerActiveTextStyle={this.props.headerActiveTextStyle}
           headerUnderlayColor={this.props.headerUnderlayColor}
           highlightStyle={this.props.highlightStyle}
+          tabItemContainerStyle={this.props.tabItemContainerStyle}
         />
       </View>
     );
