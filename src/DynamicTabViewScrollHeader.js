@@ -28,7 +28,8 @@ class DynamicTabViewScrollHeader extends React.Component {
         onPress={this._onPressHeader.bind(this, index)}
         style={[
           this.defaultStyle.tabItemContainer,
-          { backgroundColor: this.props.headerBackgroundColor }
+          { backgroundColor: this.props.headerBackgroundColor },
+          this.props.tabItemContainerStyle,
         ]}
         underlayColor={"#00000033"}
       >
