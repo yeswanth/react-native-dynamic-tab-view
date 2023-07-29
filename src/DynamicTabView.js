@@ -1,12 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import {
-	ScrollView,
-	View,
-	Dimensions,
-	FlatList,
-	TouchableHighlight,
-	Text,
-} from 'react-native';
+import { View, Dimensions, FlatList } from 'react-native';
 import DynamicTabViewScrollHeader from './DynamicTabViewScrollHeader';
 import PropTypes from 'prop-types';
 
@@ -94,6 +88,7 @@ class DynamicTabView extends React.Component {
 					this.props.tabContainerStyle,
 				]}
 			>
+				{/* eslint-disable-next-line react/prop-types */}
 				{this.props.renderTab(item, index)}
 			</View>
 		);
@@ -155,7 +150,7 @@ class DynamicTabView extends React.Component {
 	}
 }
 
-defaultStyle = {
+const defaultStyle = {
 	container: {
 		flex: 1,
 	},
@@ -195,6 +190,7 @@ DynamicTabView.propTypes = {
 	containerStyle: PropTypes.any,
 	tabContainerStyle: PropTypes.any,
 	headerContainerStyle: PropTypes.any,
+	swipeToPage: PropTypes.any,
 	//header style props
 	headerBackgroundColor: PropTypes.any,
 	headerTextStyle: PropTypes.any,
@@ -202,6 +198,10 @@ DynamicTabView.propTypes = {
 	highlightStyle: PropTypes.any,
 	noHighlightStyle: PropTypes.any,
 	headerUnderlayColor: PropTypes.any,
+
+	// tabItemProps
+	activeTabStyle: PropTypes.any,
+	tabItemContainerStyle: PropTypes.any,
 };
 
 export default DynamicTabView;

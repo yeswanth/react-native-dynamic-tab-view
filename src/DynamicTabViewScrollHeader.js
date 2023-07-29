@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TouchableHighlight, Text, FlatList, View } from 'react-native';
+import { TouchableHighlight, Text, FlatList, View } from 'react-native';
 import PropTypes from 'prop-types';
 class DynamicTabViewScrollHeader extends React.Component {
 	constructor(props) {
@@ -37,13 +37,7 @@ class DynamicTabViewScrollHeader extends React.Component {
 			>
 				<View>
 					<Text
-						style={[
-							{ fontWeight: fontWeight },
-							this.defaultStyle.tabItemText,
-							isTabActive
-								? this.props.headerActiveTextStyle
-								: this.props.headerTextStyle,
-						]}
+						style={[{ fontWeight: fontWeight }, this.defaultStyle.tabItemText]}
 					>
 						{item['title']}
 					</Text>
@@ -99,7 +93,7 @@ class DynamicTabViewScrollHeader extends React.Component {
 	}
 }
 
-DynamicdefaultStyle = {
+const DynamicdefaultStyle = {
 	headerStyle: {},
 	tabItemText: {
 		color: 'white',
@@ -138,6 +132,8 @@ DynamicTabViewScrollHeader.propTypes = {
 	highlightStyle: PropTypes.any,
 	noHighlightStyle: PropTypes.any,
 	headerUnderlayColor: PropTypes.any,
+	activeTabStyle: PropTypes.string,
+	tabItemContainerStyle: PropTypes.any,
 };
 
 export default DynamicTabViewScrollHeader;
