@@ -32,5 +32,9 @@
     ],
     "scripts": {
         "prepublish": "cp ../README.md ."
+    },
+    "dependencies": {
+        "eslint": "^8.46.0",
+        "eslint-plugin-react": "^7.33.0"
     }
 }
