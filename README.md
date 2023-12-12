@@ -21,6 +21,7 @@ import DynamicTabView from 'react-native-dynamic-tab-view';
         onChangeTab={onChangeTab}
         defaultIndex={defaultIndex}
         containerStyle={styles.container}
+        activeTabStyle={styles.activeTabStyle}
         headerBackgroundColor={'white'}
         headerUnderlayColor={'blue'}
       />
